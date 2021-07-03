@@ -7,7 +7,7 @@
             testuser: "test"
             users: [
                 {
-                    userName: "apalon"
+                    userName: "test"
                     password: "test"
                 }
             ]
