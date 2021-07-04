@@ -119,6 +119,22 @@
     home.onclick = function( event ) {
       req( 'POST', '/devHome', function() {}, { udid } );  
     }
+
+    var submitIPA   = getel("submit_ipa");
+    submitIPA.onclick = function( event ) {
+      var ipaLink   = getel("ipa_link");
+      var link = ipaLink.value;
+      req( 'POST', '/devIPA', function() {}, { udid , link} );
+
+      alert("Downloading and installation may take some time. When the operation is completed successfully, the application icon will appear on the screen.");
+    }
+
+    var clearIPA   = getel("clear_ipa");
+    clearIPA.onclick = function( event ) {
+      var ipaLink   = getel("ipa_link");
+      ipaLink.value = "";
+    }
+
     hardPress.onclick = function( event ) {
       if( mode != 'hard' ) {
         hardPress.className = 'mdi mdi-anvil mActive';
@@ -255,8 +271,15 @@
 
 <body>
     {{template "sidebar" dict "udid" .udid }}
+
+    
+
     <div class="main">
+
+      
+
         <canvas id="canvas" width="375" height="667"></canvas><br>
+
         <div style="width:375px; font-size: 32px" id="under">
             <center>
                 <i id='home' class="mdi mdi-home"></i>
@@ -264,6 +287,16 @@
                 <i id='longPress' class="mdi mdi-alarm-multiple mInactive"></i>
             </i>
         </div>
+
+        <div id="under">
+            
+                  <br>
+                  <label for='ipa_link' style="font-size: 10pt; color: Gray;">Install iOS application with ipa link (Example https://sea.apalon.com/f/e1a69ec60f41467b9feb/?dl=1)</label><br>
+                  <input id='ipa_link' name='ipa_link' type='text' size='54' style="font-size: 14pt;"><br><br>
+                  <input id='clear_ipa' type='submit' value='Clear URL' style="font-size: 20pt;">
+                  <input id='submit_ipa' type='submit' value='Start Installing' style="font-size: 20pt;"><br><br>
+        </div>
+
     </div>
 </body>
 </html>

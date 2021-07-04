@@ -64,6 +64,14 @@ func (self *ProviderConnection) doHome( udid string ) {
     self.provChan <- home
 }
 
+func (self *ProviderConnection) doInstallIPA( udid string, link string) {
+    ipa := &ProvInstallIPA{
+        udid: udid,
+        link: link,
+    }
+    self.provChan <- ipa
+}
+
 func (self *ProviderConnection) doKeys( udid string, keys string ) {
     action := &ProvKeys{
         udid: udid,

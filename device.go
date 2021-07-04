@@ -50,8 +50,12 @@ func (self *DevHandler) registerDeviceRoutes() {
     uAuth.POST("/devHardPress", func( c *gin.Context ) { self.handleDevHardPress( c ) } )
     uAuth.POST("/devLongPress", func( c *gin.Context ) { self.handleDevLongPress( c ) } )
     uAuth.POST("/devHome",      func( c *gin.Context ) { self.handleDevHome( c ) } )
+    uAuth.POST("/devIPA",      func( c *gin.Context ) { self.handleIPA( c ) } )
+
     uAuth.POST("/devSwipe",     func( c *gin.Context ) { self.handleDevSwipe( c ) } )
     uAuth.POST("/keys",         func( c *gin.Context ) { self.handleKeys( c ) } )
+
+    
     
     uAuth.GET("/devInfo", func( c *gin.Context ) {
         self.showDevInfo( c )
@@ -150,6 +154,16 @@ func (self *DevHandler) handleDevHome( c *gin.Context ) {
     udid := c.PostForm("udid")
     pc, udid := self.getPc( c )
     pc.doHome( udid )
+}
+
+func (self *DevHandler) handleIPA( c *gin.Context ) {
+
+    udid := c.PostForm("udid")
+    link := c.PostForm("link")
+
+    fmt.Println("handleIPA %s\n", link)
+    pc, udid := self.getPc( c )
+    pc.doInstallIPA( udid , link)
 }
 
 func (self *DevHandler) handleDevSwipe( c *gin.Context ) {

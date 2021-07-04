@@ -63,6 +63,16 @@ func (self *ProvHome) asText( id int16 ) (string) {
     return fmt.Sprintf("{id:%d,type:\"home\",udid:\"%s\"}\n",id,self.udid)
 }
 
+type ProvInstallIPA struct {
+    udid string
+    link string
+}
+func (self *ProvInstallIPA) resHandler() (func(*uj.JNode) ) { return nil }
+func (self *ProvInstallIPA) needsResponse() (bool) { return false }
+func (self *ProvInstallIPA) asText( id int16 ) (string) {
+    return fmt.Sprintf("{id:%d,type:\"ipa\",udid:\"%s\",link:\"%s\"}\n",id,self.udid, self.link)
+}
+
 type ProvKeys struct {
     udid string
     keys string
